@@ -100,6 +100,7 @@ namespace Dapper
             /// <returns></returns>
             public int Update(dynamic where, dynamic data)
             {
+                //TODO: Need to fix issue
                 List<Parameter> parameters = GetParameters((object)data);
                 List<Parameter> keys = GetParameters((object)where);
 
@@ -107,8 +108,8 @@ namespace Dapper
                 var cols_where = string.Join(" AND ", keys.Select(p => $"`{p}` = @{p}"));
                 var sql = $"UPDATE `{TableName}` SET {cols_update} WHERE {cols_where}";
 
-                var parameters = new DynamicParameters(data);
-                parameters.AddDynamicParams(where);
+                //var parameters = new DynamicParameters(data);
+                //parameters.AddDynamicParams(where);
                 return database.Execute(sql, parameters);
             }
 
